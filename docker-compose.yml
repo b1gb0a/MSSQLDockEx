@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+    sql-server:
+      image: mcr.microsoft.com/mssql/server:latest
+      restart: always
+      hostname: my-server
+      container_name: my-server      
+      ports:
+        - 1433:1433
+        #- 1434:1434
+      environment:      
+         - 'TZ=Europe/Moscow'
+         - 'ACCEPT_EULA=Y'
+         - 'SA_PASSWORD=gFj2354!ld'
+         - 'MSSQL_PID=Express'
+         - 'MSSQL_LCID=1049'
+         - 'MSSQL_COLLATION=1049'
+         - 'MSSQL_TCP_PORT=1433'
+         #- 'MSSQL_IP_ADDRESS=127.0.0.1'
+         - 'MSSQL_BACKUP_DIR=/var/opt/mssql/backups/'
+         - 'MSSQL_DATA_DIR=/var/opt/mssql/data/'
+         - 'MSSQL_LOG_DIR=/var/opt/mssql/log/'
+         - 'MSSQL_DUMP_DIR=/var/opt/mssql/dumps/'
+      volumes:
+         - '.\db:/var/opt/mssql/data'
+         - '.\backups:/var/opt/mssql/backups'
+        
+        
+        #docker container exec -it my-server cmd
